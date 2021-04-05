@@ -8,6 +8,10 @@ defmodule ExSDP.AttributeTest do
       assert {:ok, {:framerate, {30, 1}}} = Attribute.parse("framerate:30/1")
     end
 
+    test "handles broadcast type" do
+      assert {:ok, {:type, :broadcast}} = Attribute.parse("type:broadcast")
+    end
+
     test "handles directly assignable attributes" do
       assert {:ok, {:cat, "category"}} = Attribute.parse("cat:category")
     end
