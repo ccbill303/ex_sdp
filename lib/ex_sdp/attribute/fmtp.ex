@@ -5,6 +5,7 @@ defmodule ExSDP.Attribute.FMTP do
   Parameters for H264 (not all, RFC 6184), VP8, VP9 and OPUS (RFC 7587) are currently supported.
   """
   alias ExSDP.Utils
+  require Logger
 
   @enforce_keys [:pt]
   defstruct @enforce_keys ++
@@ -28,6 +29,7 @@ defmodule ExSDP.Attribute.FMTP do
                 :usedtx,
                 # VP8/9
                 :profile_id,
+                :sprop_parameter_sets,
                 :max_fr
               ]
 
@@ -50,6 +52,7 @@ defmodule ExSDP.Attribute.FMTP do
           usedtx: boolean() | nil,
           # VP8/9
           profile_id: non_neg_integer() | nil,
+          sprop_parameter_sets: binary() | nil,
           max_fr: non_neg_integer() | nil
         }
 
@@ -163,6 +166,15 @@ defmodule ExSDP.Attribute.FMTP do
          do: {rest, %{fmtp | profile_id: value}}
   end
 
+  defp parse_param(["sprop-parameter-sets=" <> sprop_parameter_sets | rest], fmtp) do
+    {rest, %{fmtp | sprop_parameter_sets: sprop_parameter_sets}}
+  end
+
+  # defp parse_param([unrecognized | rest], fmtp) do
+  # Logger.warning("Ignoring unrecognized fmt parameter:  #{inspect(unrecognized)}")
+  # {rest, fmtp}
+  # end
+
   defp parse_param(_params, _fmtp), do: {:error, :unsupported_parameter}
 end
 
@@ -191,6 +203,7 @@ defimpl String.Chars, for: ExSDP.Attribute.FMTP do
         Serializer.maybe_serialize("usedtx", fmtp.usedtx),
         # VP8/9
         Serializer.maybe_serialize("profile-id", fmtp.profile_id),
+        Serializer.maybe_serialize("sprop-parameter-sets", fmtp.sprop_parameter_sets),
         Serializer.maybe_serialize("max-fr", fmtp.max_fr)
       ]
       |> Enum.filter(fn param -> param != "" end)
