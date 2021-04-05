@@ -17,6 +17,20 @@ defmodule ExSDP.Attribute.FMTPTest do
       assert {:ok, expected} == FMTP.parse(fmtp)
     end
 
+    test "parses fmtp with sprop-parameter-sets" do
+      fmtp =
+        "96 profile-level-id=4d0029;packetization-mode=1;sprop-parameter-sets=Z00AKeKQCgC3YC3AQEBpB4kRUA==,a048gA=="
+
+      expected = %FMTP{
+        pt: 96,
+        profile_level_id: 0x4D0029,
+        packetization_mode: 1,
+        sprop_parameter_sets: "Z00AKeKQCgC3YC3AQEBpB4kRUA==,a048gA=="
+      }
+
+      assert {:ok, expected} == FMTP.parse(fmtp)
+    end
+
     test "returns an error when there is unsupported parameter" do
       fmtp = "108 profile-level-id=42e01f;level-asymmetry-allowed=1;unsupported-param=1"
       assert {:error, :unsupported_parameter} = FMTP.parse(fmtp)
