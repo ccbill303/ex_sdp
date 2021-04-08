@@ -14,7 +14,7 @@ The package can be installed by adding `ex_sdp` to your list of dependencies in 
 ```elixir
 def deps do
   [
-    {:ex_sdp, "https://github.com/ccbill303/ex_sdp.git", tag: "0.3.0-f1"}
+    {:ex_sdp, git: "https://github.com/ccbill303/ex_sdp.git", tag: "0.3.0-f1"}
   ]
 end
 ```
