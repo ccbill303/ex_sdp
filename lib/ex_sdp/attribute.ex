@@ -43,13 +43,16 @@ defmodule ExSDP.Attribute do
   @type setup :: {:setup, setup_value()}
   @type mid :: {:mid, binary()}
   @type group :: {:group, {group_semantic(), [binary()]}}
+  @type fmtp :: {:fmtp, __MODULE__.FMTP.t()}
+  @type msid :: {:msid, __MODULE__.MSID.t()}
   @type rtpmap :: {:rtpmap, __MODULE__.RTPMapping.t()}
+  @type ssrc :: {:ssrc, __MODULE__.SSRC.t()}
 
   @type t ::
           rtpmap()
-          | __MODULE__.MSID.t()
-          | __MODULE__.FMTP.t()
-          | __MODULE__.SSRC.t()
+          | msid()
+          | fmtp()
+          | ssrc()
           | cat()
           | charset()
           | keywds()
