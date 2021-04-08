@@ -1,10 +1,11 @@
 # ExSDP
 
-[![Hex.pm](https://img.shields.io/hexpm/v/ex_sdp.svg)](https://hex.pm/packages/ex_sdp)
-[![API Docs](https://img.shields.io/badge/api-docs-yellow.svg?style=flat)](https://hexdocs.pm/ex_sdp/)
-[![CircleCI](https://circleci.com/gh/membraneframework/ex_sdp.svg?style=svg)](https://circleci.com/gh/membraneframework/ex_sdp)
 
 Parser and serializer for Session Description Protocol. Based on [RFC4566](https://tools.ietf.org/html/rfc4566)
+
+This fork:
+- fixes a few parsing issues I experienced with some RTSP servers 
+- adds some opinionated changes to the representation of attributes (e.g., adds keys for `:rtpmap`, `:fmtp`, `:msid`, and `:ssrc` rather than just detection of module type)
 
 ## Installation
 
@@ -13,7 +14,7 @@ The package can be installed by adding `ex_sdp` to your list of dependencies in 
 ```elixir
 def deps do
   [
-    {:ex_sdp, "~> 0.3.0"}
+    {:ex_sdp, "https://github.com/ccbill303/ex_sdp.git", tag: "0.3.0"}
   ]
 end
 ```
@@ -85,7 +86,7 @@ a=rtpmap:99 h263-1998/90000
      },
      %ExSDP.Media{
        attributes: [
-         %ExSDP.Attribute.RTPMapping{
+         rtpmap: %ExSDP.Attribute.RTPMapping{
            clock_rate: 90000,
            encoding: "h263-1998",
            params: nil,
@@ -176,7 +177,7 @@ Serializer serializes `ExSDP` struct to a string with `\r\n` terminated lines.
      },
      %ExSDP.Media{
        attributes: [
-         %ExSDP.Attribute.RTPMapping{
+         rtpmap: %ExSDP.Attribute.RTPMapping{
            clock_rate: 90000,
            encoding: "h263-1998",
            payload_type: 99
