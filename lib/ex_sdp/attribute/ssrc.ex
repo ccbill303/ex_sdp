@@ -19,9 +19,14 @@ defmodule ExSDP.Attribute.SSRC do
     with [id, attribute] <- String.split(ssrc, " "),
          {:ok, id} <- Utils.parse_numeric_string(id) do
       case String.split(attribute, ":") do
-        [attribute, value] -> {:ok, %__MODULE__{id: id, attribute: attribute, value: value}}
-        [attribute] -> {:ok, %__MODULE__{id: id, attribute: attribute}}
-        _ -> {:error, :invalid_ssrc}
+        [attribute, value] ->
+          {:ok, {:ssrc, %__MODULE__{id: id, attribute: attribute, value: value}}}
+
+        [attribute] ->
+          {:ok, {:ssrc, %__MODULE__{id: id, attribute: attribute}}}
+
+        _ ->
+          {:error, :invalid_ssrc}
       end
     else
       _ -> {:error, :invalid_ssrc}

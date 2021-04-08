@@ -13,6 +13,11 @@ defmodule ExSDP.Serializer do
   def maybe_serialize(type, values) when is_list(values),
     do: Enum.map_join(values, "\n", fn value -> maybe_serialize(type, value) end)
 
+  def maybe_serialize(type, {:fmtp, fmtp}), do: "#{type}=#{fmtp}"
+  def maybe_serialize(type, {:msid, msid}), do: "#{type}=#{msid}"
+  def maybe_serialize(type, {:rtpmap, mapping}), do: "#{type}=#{mapping}"
+  def maybe_serialize(type, {:ssrc, ssrc}), do: "#{type}=#{ssrc}"
+
   def maybe_serialize(type, {:framerate, {frames, sec}}),
     do: "#{type}=framerate:#{frames}/#{sec}"
 

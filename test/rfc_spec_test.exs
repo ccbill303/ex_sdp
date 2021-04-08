@@ -53,11 +53,12 @@ defmodule ExSDP.RFCTest do
                  },
                  %Media{
                    attributes: [
-                     %Attribute.RTPMapping{
-                       clock_rate: 90_000,
-                       encoding: "h263-1998",
-                       payload_type: 99
-                     }
+                     {:rtpmap,
+                      %Attribute.RTPMapping{
+                        clock_rate: 90_000,
+                        encoding: "h263-1998",
+                        payload_type: 99
+                      }}
                    ],
                    connection_data: %ConnectionData{ttl: 127, address: {224, 2, 17, 12}},
                    fmt: [99],
@@ -112,24 +113,27 @@ defmodule ExSDP.RFCTest do
                media: [
                  %Media{
                    attributes: [
-                     %Attribute.RTPMapping{
-                       clock_rate: 8000,
-                       encoding: "PCMU",
-                       params: 1,
-                       payload_type: 0
-                     },
-                     %Attribute.RTPMapping{
-                       clock_rate: 8000,
-                       encoding: "PCMA",
-                       params: 1,
-                       payload_type: 8
-                     },
-                     %Attribute.RTPMapping{
-                       clock_rate: 8000,
-                       encoding: "iLBC",
-                       params: 1,
-                       payload_type: 97
-                     }
+                     {:rtpmap,
+                      %Attribute.RTPMapping{
+                        clock_rate: 8000,
+                        encoding: "PCMU",
+                        params: 1,
+                        payload_type: 0
+                      }},
+                     {:rtpmap,
+                      %Attribute.RTPMapping{
+                        clock_rate: 8000,
+                        encoding: "PCMA",
+                        params: 1,
+                        payload_type: 8
+                      }},
+                     {:rtpmap,
+                      %Attribute.RTPMapping{
+                        clock_rate: 8000,
+                        encoding: "iLBC",
+                        params: 1,
+                        payload_type: 97
+                      }}
                    ],
                    bandwidth: [],
                    connection_data: %ConnectionData{address: {:IP4, "host.atlanta.example.com"}},
@@ -142,16 +146,18 @@ defmodule ExSDP.RFCTest do
                  },
                  %Media{
                    attributes: [
-                     %Attribute.RTPMapping{
-                       clock_rate: 90_000,
-                       encoding: "H261",
-                       payload_type: 31
-                     },
-                     %Attribute.RTPMapping{
-                       clock_rate: 90_000,
-                       encoding: "MPV",
-                       payload_type: 32
-                     }
+                     {:rtpmap,
+                      %Attribute.RTPMapping{
+                        clock_rate: 90_000,
+                        encoding: "H261",
+                        payload_type: 31
+                      }},
+                     {:rtpmap,
+                      %Attribute.RTPMapping{
+                        clock_rate: 90_000,
+                        encoding: "MPV",
+                        payload_type: 32
+                      }}
                    ],
                    bandwidth: [],
                    connection_data: %ConnectionData{address: {:IP4, "host.atlanta.example.com"}},
@@ -206,12 +212,13 @@ defmodule ExSDP.RFCTest do
                media: [
                  %Media{
                    attributes: [
-                     %Attribute.RTPMapping{
-                       clock_rate: 8000,
-                       encoding: "PCMU",
-                       params: 1,
-                       payload_type: 0
-                     }
+                     {:rtpmap,
+                      %Attribute.RTPMapping{
+                        clock_rate: 8000,
+                        encoding: "PCMU",
+                        params: 1,
+                        payload_type: 0
+                      }}
                    ],
                    bandwidth: [],
                    connection_data: %ConnectionData{address: {:IP4, "host.biloxi.example.com"}},
@@ -224,12 +231,13 @@ defmodule ExSDP.RFCTest do
                  },
                  %Media{
                    attributes: [
-                     %Attribute.RTPMapping{
-                       clock_rate: 90_000,
-                       encoding: "MPV",
-                       payload_type: 32,
-                       params: nil
-                     }
+                     {:rtpmap,
+                      %Attribute.RTPMapping{
+                        clock_rate: 90_000,
+                        encoding: "MPV",
+                        payload_type: 32,
+                        params: nil
+                      }}
                    ],
                    bandwidth: [],
                    connection_data: %ConnectionData{address: {:IP4, "host.biloxi.example.com"}},
@@ -295,11 +303,12 @@ defmodule ExSDP.RFCTest do
                    },
                    %Media{
                      attributes: [
-                       %Attribute.RTPMapping{
-                         clock_rate: 90_000,
-                         encoding: "h263-1998",
-                         payload_type: 99
-                       }
+                       {:rtpmap,
+                        %Attribute.RTPMapping{
+                          clock_rate: 90_000,
+                          encoding: "h263-1998",
+                          payload_type: 99
+                        }}
                      ],
                      fmt: [99],
                      port: 51_372,
@@ -353,24 +362,27 @@ defmodule ExSDP.RFCTest do
                  media: [
                    %Media{
                      attributes: [
-                       %Attribute.RTPMapping{
-                         clock_rate: 8000,
-                         encoding: "PCMU",
-                         params: 1,
-                         payload_type: 0
-                       },
-                       %Attribute.RTPMapping{
-                         clock_rate: 8000,
-                         encoding: "PCMA",
-                         params: 1,
-                         payload_type: 8
-                       },
-                       %Attribute.RTPMapping{
-                         clock_rate: 8000,
-                         encoding: "iLBC",
-                         params: 1,
-                         payload_type: 97
-                       }
+                       {:rtpmap,
+                        %Attribute.RTPMapping{
+                          clock_rate: 8000,
+                          encoding: "PCMU",
+                          params: 1,
+                          payload_type: 0
+                        }},
+                       {:rtpmap,
+                        %Attribute.RTPMapping{
+                          clock_rate: 8000,
+                          encoding: "PCMA",
+                          params: 1,
+                          payload_type: 8
+                        }},
+                       {:rtpmap,
+                        %Attribute.RTPMapping{
+                          clock_rate: 8000,
+                          encoding: "iLBC",
+                          params: 1,
+                          payload_type: 97
+                        }}
                      ],
                      bandwidth: [],
                      encryption: nil,
@@ -382,16 +394,18 @@ defmodule ExSDP.RFCTest do
                    },
                    %Media{
                      attributes: [
-                       %Attribute.RTPMapping{
-                         clock_rate: 90_000,
-                         encoding: "H261",
-                         payload_type: 31
-                       },
-                       %Attribute.RTPMapping{
-                         clock_rate: 90_000,
-                         encoding: "MPV",
-                         payload_type: 32
-                       }
+                       {:rtpmap,
+                        %Attribute.RTPMapping{
+                          clock_rate: 90_000,
+                          encoding: "H261",
+                          payload_type: 31
+                        }},
+                       {:rtpmap,
+                        %Attribute.RTPMapping{
+                          clock_rate: 90_000,
+                          encoding: "MPV",
+                          payload_type: 32
+                        }}
                      ],
                      bandwidth: [],
                      encryption: nil,
@@ -445,12 +459,13 @@ defmodule ExSDP.RFCTest do
                  media: [
                    %Media{
                      attributes: [
-                       %Attribute.RTPMapping{
-                         clock_rate: 8000,
-                         encoding: "PCMU",
-                         params: 1,
-                         payload_type: 0
-                       }
+                       {:rtpmap,
+                        %Attribute.RTPMapping{
+                          clock_rate: 8000,
+                          encoding: "PCMU",
+                          params: 1,
+                          payload_type: 0
+                        }}
                      ],
                      bandwidth: [],
                      encryption: nil,
@@ -462,12 +477,13 @@ defmodule ExSDP.RFCTest do
                    },
                    %Media{
                      attributes: [
-                       %Attribute.RTPMapping{
-                         clock_rate: 90_000,
-                         encoding: "MPV",
-                         payload_type: 32,
-                         params: nil
-                       }
+                       {:rtpmap,
+                        %Attribute.RTPMapping{
+                          clock_rate: 90_000,
+                          encoding: "MPV",
+                          payload_type: 32,
+                          params: nil
+                        }}
                      ],
                      bandwidth: [],
                      encryption: nil,

@@ -66,12 +66,13 @@ defmodule ExSDPTest do
       },
       %Media{
         attributes: [
-          %Attribute.RTPMapping{
-            clock_rate: 90_000,
-            encoding: "h263-1998",
-            params: nil,
-            payload_type: 99
-          }
+          {:rtpmap,
+           %Attribute.RTPMapping{
+             clock_rate: 90_000,
+             encoding: "h263-1998",
+             params: nil,
+             payload_type: 99
+           }}
         ],
         bandwidth: [
           %Bandwidth{bandwidth: 256, type: :CT}

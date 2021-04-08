@@ -7,13 +7,13 @@ defmodule ExSDP.Attribute.SSRCTest do
     test "parses ssrc with attribute and value" do
       ssrc = "4112531724 cname:HPd3XfRHXYUxzfsJ"
       expected = %SSRC{id: 4_112_531_724, attribute: "cname", value: "HPd3XfRHXYUxzfsJ"}
-      assert {:ok, expected} == SSRC.parse(ssrc)
+      assert {:ok, {:ssrc, expected}} == SSRC.parse(ssrc)
     end
 
     test "parses ssrc only with attribute" do
       ssrc = "4112531724 some-attr"
       expected = %SSRC{id: 4_112_531_724, attribute: "some-attr", value: nil}
-      assert {:ok, expected} == SSRC.parse(ssrc)
+      assert {:ok, {:ssrc, expected}} == SSRC.parse(ssrc)
     end
 
     test "returns an error when there is no attribute after id" do

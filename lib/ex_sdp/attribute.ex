@@ -30,6 +30,7 @@ defmodule ExSDP.Attribute do
   @type lang :: {:lang, binary()}
   @type sdplang :: {:sdplang, binary()}
   @type tool :: {:tool, binary()}
+  @type control :: {:control, binary()}
   @type type :: {:type, type_value()}
   @type framerate :: {:framerate, framerate_value()}
   @type maxptime :: {:maxptime, non_neg_integer()}
@@ -42,9 +43,10 @@ defmodule ExSDP.Attribute do
   @type setup :: {:setup, setup_value()}
   @type mid :: {:mid, binary()}
   @type group :: {:group, {group_semantic(), [binary()]}}
+  @type rtpmap :: {:rtpmap, __MODULE__.RTPMapping.t()}
 
   @type t ::
-          __MODULE__.RTPMapping.t()
+          rtpmap()
           | __MODULE__.MSID.t()
           | __MODULE__.FMTP.t()
           | __MODULE__.SSRC.t()
@@ -55,6 +57,7 @@ defmodule ExSDP.Attribute do
           | lang()
           | sdplang()
           | tool()
+          | control()
           | type()
           | framerate()
           | maxptime()
@@ -97,6 +100,9 @@ defmodule ExSDP.Attribute do
   defp do_parse("lang", value, _opts), do: {:ok, {:lang, value}}
   defp do_parse("sdplang", value, _opts), do: {:ok, {:sdplang, value}}
   defp do_parse("tool", value, _opts), do: {:ok, {:tool, value}}
+  defp do_parse("control", value, _opts), do: {:ok, {:control, value}}
+  defp do_parse("range", value, _opts), do: {:ok, {:range, value}}
+  defp do_parse("transform", value, _opts), do: {:ok, {:transform, value}}
   defp do_parse("type", value, _opts), do: parse_type(value)
   defp do_parse("framerate", value, _opts), do: parse_framerate(value)
   defp do_parse("ice-ufrag", value, _opts), do: {:ok, {:ice_ufrag, value}}

@@ -14,7 +14,7 @@ defmodule ExSDP.Attribute.FMTPTest do
         packetization_mode: 1
       }
 
-      assert {:ok, expected} == FMTP.parse(fmtp)
+      assert {:ok, {:fmtp, expected}} == FMTP.parse(fmtp)
     end
 
     test "parses fmtp with sprop-parameter-sets" do
@@ -28,7 +28,7 @@ defmodule ExSDP.Attribute.FMTPTest do
         sprop_parameter_sets: "Z00AKeKQCgC3YC3AQEBpB4kRUA==,a048gA=="
       }
 
-      assert {:ok, expected} == FMTP.parse(fmtp)
+      assert {:ok, {:fmtp, expected}} == FMTP.parse(fmtp)
     end
 
     test "returns an error when there is unsupported parameter" do

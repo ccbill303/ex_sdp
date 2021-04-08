@@ -55,24 +55,27 @@ defmodule ExSDP.MediaTest do
         |> String.split("\n")
 
       parsed_attributes = [
-        %Attribute.RTPMapping{
-          clock_rate: 8000,
-          encoding: "L8",
-          params: 1,
-          payload_type: 96
-        },
-        %Attribute.RTPMapping{
-          clock_rate: 8000,
-          encoding: "L16",
-          params: 1,
-          payload_type: 97
-        },
-        %Attribute.RTPMapping{
-          clock_rate: 11_025,
-          encoding: "L16",
-          params: 2,
-          payload_type: 98
-        }
+        {:rtpmap,
+         %Attribute.RTPMapping{
+           clock_rate: 8000,
+           encoding: "L8",
+           params: 1,
+           payload_type: 96
+         }},
+        {:rtpmap,
+         %Attribute.RTPMapping{
+           clock_rate: 8000,
+           encoding: "L16",
+           params: 1,
+           payload_type: 97
+         }},
+        {:rtpmap,
+         %Attribute.RTPMapping{
+           clock_rate: 11_025,
+           encoding: "L16",
+           params: 2,
+           payload_type: 98
+         }}
       ]
 
       {:ok, {[""], medium}} =
@@ -191,12 +194,14 @@ defmodule ExSDP.MediaTest do
     test "serializes video description with an attribute" do
       # attribute = "rtpmap:99 h263-1998/90000"
 
-      attribute = %Attribute.RTPMapping{
-        clock_rate: 90_000,
-        encoding: "h263-1998",
-        params: nil,
-        payload_type: 99
-      }
+      attribute =
+        {:rtpmap,
+         %Attribute.RTPMapping{
+           clock_rate: 90_000,
+           encoding: "h263-1998",
+           params: nil,
+           payload_type: 99
+         }}
 
       media = %Media{
         type: :video,

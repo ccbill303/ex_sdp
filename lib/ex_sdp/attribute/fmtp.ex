@@ -74,7 +74,7 @@ defmodule ExSDP.Attribute.FMTP do
     do_parse(params, fmtp)
   end
 
-  defp do_parse([], fmtp), do: {:ok, fmtp}
+  defp do_parse([], fmtp), do: {:ok, {:fmtp, fmtp}}
 
   defp do_parse(params, fmtp) do
     case parse_param(params, fmtp) do

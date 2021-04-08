@@ -28,7 +28,7 @@ defmodule ExSDP.Attribute.MSID do
         {:error, :invalid_msid}
 
       [id] ->
-        {:ok, %__MODULE__{id: id}}
+        {:ok, {:msid, %__MODULE__{id: id}}}
 
       [id, app_data] ->
         msid = %__MODULE__{
@@ -36,7 +36,7 @@ defmodule ExSDP.Attribute.MSID do
           app_data: app_data
         }
 
-        {:ok, msid}
+        {:ok, {:msid, msid}}
 
       _ ->
         {:error, :invalid_msid}
