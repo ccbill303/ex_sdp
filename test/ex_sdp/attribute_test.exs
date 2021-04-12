@@ -4,6 +4,14 @@ defmodule ExSDP.AttributeTest do
   alias ExSDP.Attribute
 
   describe "Attribute parser" do
+    test "handles integer framerate" do
+      assert {:ok, {:framerate, 30.0}} = Attribute.parse("framerate:30")
+    end
+
+    test "handles decimal framerate" do
+      assert {:ok, {:framerate, 30.0}} = Attribute.parse("framerate:30.0")
+    end
+
     test "handles framerate" do
       assert {:ok, {:framerate, {30, 1}}} = Attribute.parse("framerate:30/1")
     end
