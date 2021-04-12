@@ -154,9 +154,15 @@ defmodule ExSDP.Attribute do
 
   defp parse_framerate(framerate) do
     case String.split(framerate, "/") do
-      [value] -> {:ok, {:framerate, String.to_float(value)}}
-      [left, right] -> {:ok, {:framerate, {String.to_integer(left), String.to_integer(right)}}}
-      _ -> {:error, :invalid_framerate}
+      [value] ->
+        {fval, _} = Float.parse(value)
+        {:ok, {:framerate, fval}}
+
+      [left, right] ->
+        {:ok, {:framerate, {String.to_integer(left), String.to_integer(right)}}}
+
+      _ ->
+        {:error, :invalid_framerate}
     end
   end
 
